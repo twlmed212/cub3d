@@ -1,0 +1,13 @@
+{
+    "[c]": {
+        "editor.defaultFormatter": "keyhr.42-c-format"
+    },
+    "files.associations": {
+        "libft.h": "c",
+        "limits.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c",
+        "stdio.h": "c",
+        "unistd.h": "c"
+    }
+}
