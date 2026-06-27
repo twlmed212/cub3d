@@ -3,30 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 19:38:12 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/18 17:11:21 by mtawil           ###   ########.fr       */
+/*   Created: 2024/10/28 15:51:02 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/11/15 17:01:20 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest_str, const void *src_str, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	unsigned char	*dest;
-	unsigned char	*src;
+	unsigned char		*p;
+	const unsigned char	*m;
+	size_t				i;
 
-	dest = (unsigned char *)dest_str;
-	src = (unsigned char *)src_str;
-	if (!dest && !src)
+	if (dest == NULL && src == NULL)
 		return (NULL);
-	while (n > 0)
+	p = (unsigned char *)dest;
+	m = (const unsigned char *)src;
+	i = 0;
+	while (i < n)
 	{
-		*dest = *src;
-		dest++;
-		src++;
-		n--;
+		p[i] = m[i];
+		i++;
 	}
-	return (dest_str);
+	return (dest);
 }
+/*int main()
+{
+		char dest[40]="abde  sama";
+		char src[40]="hello ";
+			ft_memcpy(dest,src,5);
+			printf("%s",dest);
+ } */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 15:18:35 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/18 17:11:58 by mtawil           ###   ########.fr       */
+/*   Created: 2024/11/08 17:14:44 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/11/15 18:27:14 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned char	*se1;
-	unsigned char	*se2;
-	size_t			i;
+	size_t	i;
 
-	se1 = (unsigned char *)s1;
-	se2 = (unsigned char *)s2;
 	i = 0;
-	if (n == 0)
-		return (0);
-	while (i < n && (se1[i] || se2[i]))
-	{
-		if (se1[i] != se2[i])
-			return (se1[i] - se2[i]);
+	n = n - 1;
+	while (i < n && s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	}
-	return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	char	dest[15] = "aaaezppp";
+// 	char	src[10] = "aadeee";
+
+// 	printf("%d\n", ft_strncmp(dest, src, 4));
+// 	printf("%d\n", strncmp(dest, src, 4));
+// }

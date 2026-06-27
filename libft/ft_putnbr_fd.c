@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 16:49:05 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/17 11:20:58 by mtawil           ###   ########.fr       */
+/*   Created: 2024/11/12 17:59:47 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/11/12 17:59:51 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,32 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	save;
+	long	nb;
 
-	if (n < 0)
+	nb = n;
+	if (nb < 0)
 	{
-		ft_putchar_fd('-', fd);
-		if (n == -2147483648)
-		{
-			ft_putstr_fd("2147483648", fd);
-			return ;
-		}
-		n = n * -1;
+		write(fd, "-", 1);
+		nb *= -1;
 	}
-	if (n >= 10)
+	if (nb <= 9 && nb >= 0)
 	{
-		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd(nb + '0', fd);
 	}
-	save = n % 10 + '0';
-	ft_putchar_fd(save, fd);
+	else
+	{
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
+	}
 }
+
+// int main(){
+//     int number = 234;  // Number to test
+//     int fd = 1;           // File descriptor 1 for stdout
+
+//     // Call ft_putnbr_fd to print the number to stdout
+//     ft_putnbr_fd(number, fd);
+//     write(fd, "\n", 1);   // Print a new line after the number
+
+//     return (0);
+// }

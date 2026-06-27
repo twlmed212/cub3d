@@ -3,77 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 11:49:15 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/18 17:22:58 by mtawil           ###   ########.fr       */
+/*   Created: 2024/11/09 00:08:42 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/11/11 17:44:58 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	string_size(int n)
+static char	*ft_char(char *s, unsigned int number, int len)
 {
-	int	size;
-
-	size = 0;
-	if (n == 0)
-		return (++size);
-	if (n < 0)
+	while (number > 0)
 	{
-		if (n == -2147483648)
-		{
-			n++;
-		}
-		n *= -1;
-		size++;
+		s[len--] = 48 + (number % 10);
+		number = number / 10;
 	}
-	while (n > 0)
-	{
-		n /= 10;
-		size++;
-	}
-	return (size);
+	return (s);
 }
 
-static int	signl_handler(char *result, int *int_max, int n)
+static int	get_num_length(int n)
 {
+	int	length;
+
+	if (n == 0)
+		return (1);
+	length = 0;
 	if (n < 0)
+		length++;
+	while (n != 0)
 	{
-		result[0] = '-';
-		if (n == -2147483648)
-		{
-			n++;
-			*int_max = 1;
-		}
-		n *= -1;
+		length++;
+		n /= 10;
 	}
-	return (n);
+	return (length);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*result;
-	int		nmbr_length;
-	int		int_max;
+	int		length;
+	char	*str;
+	long	nb;
 
-	int_max = 0;
-	nmbr_length = string_size(n);
-	result = malloc((nmbr_length + 1) * sizeof(char));
-	if (!result)
+	nb = n;
+	length = get_num_length(n);
+	str = (char *)malloc(length + 1);
+	if (!str)
 		return (NULL);
-	if (n == 0)
-		result[0] = '0';
-	n = signl_handler(result, &int_max, n);
-	result[nmbr_length--] = 0;
-	while (n > 0)
+	str[length--] = '\0';
+	if (nb < 0)
 	{
-		if (int_max && nmbr_length == 10)
-			result[nmbr_length] = '8';
-		else
-			result[nmbr_length] = (n % 10) + 48;
-		n /= 10;
-		nmbr_length--;
+		str[0] = '-';
+		nb = -nb;
 	}
-	return (result);
+	else if (nb == 0)
+	{
+		str[0] = '0';
+	}
+	str = ft_char(str, nb, length);
+	return (str);
 }
+/*
+ int main()
+ {
+	 int number1 = -12345;
+	 printf("The string is: %s\n", ft_itoa(number1)); // Output: -12345
+
+	 int number2 = 56789;
+	 printf("The string is: %s\n", ft_itoa(number2)); // Output: 56789
+
+	 int number3 = 0;
+	 printf("The string is: %s\n", ft_itoa(number3)); // Output: 0
+
+	 return 0;
+ }*/

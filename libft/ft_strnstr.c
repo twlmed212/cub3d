@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:55:25 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/18 17:17:03 by mtawil           ###   ########.fr       */
+/*   Created: 2024/10/30 11:16:42 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/11/13 14:50:04 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,30 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
 	size_t	j;
-	size_t	ltf;
 
-	i = 0;
-	ltf = ft_strlen(little);
-	if (!big && !little)
-		return (0);
 	if (*little == '\0')
 		return ((char *)big);
-	while (big[i] && i < len)
+	if (len == 0)
+		return (NULL);
+	i = 0;
+	while (big[i] != '\0' && i < len)
 	{
 		j = 0;
-		while ((little[j]) && (i + j) < len && (big[i + j] == little[j]))
+		while (little[j] != '\0' && big[i + j] == little[j] && (i + j) < len)
+		{
 			j++;
-		if (ltf == j)
+		}
+		if (little[j] == '\0')
 			return ((char *)(big + i));
 		i++;
 	}
 	return (NULL);
 }
+// #include <stdio.h>
+// int	main(void)
+// {
+// char	*b = "abdessama";
+// char	*p = "sa";
+
+// printf("%s",ft_strnstr(b,p,7));
+// }

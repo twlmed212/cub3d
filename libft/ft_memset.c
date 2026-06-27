@@ -3,25 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 20:44:13 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/17 11:20:44 by mtawil           ###   ########.fr       */
+/*   Created: 2024/10/28 15:51:55 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/11/15 17:01:29 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *a, int c, int len)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	void	*b;
+	size_t			i;
+	unsigned char	*b;
 
-	b = a;
-	while (len > 0)
+	b = (unsigned char *)s;
+	i = 0;
+	while (i < n)
 	{
-		*(unsigned char *)b = (unsigned char)c;
-		b++;
-		len--;
+		b[i] = (unsigned char)c;
+		i++;
 	}
-	return (a);
+	return (s);
 }
+// int	main(void){
+
+// char s[40]="abde";
+
+// memset(s, 'g', 4);
+
+// printf("%s",s);
+
+// }

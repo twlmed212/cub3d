@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 11:35:25 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/18 13:50:47 by mtawil           ###   ########.fr       */
+/*   Created: 2024/10/28 15:52:31 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/11/11 16:02:36 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,29 @@
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	srclen;
-	size_t	destlen;
-	size_t	y;
+	size_t	ld;
+	size_t	ls;
 
+	if (!dst && size == 0)
+		return (ft_strlen(src));
+	ld = ft_strlen(dst);
+	ls = ft_strlen(src);
+	if (size <= ld)
+		return (size + ls);
 	i = 0;
-	destlen = ft_strlen(dst);
-	y = destlen;
-	srclen = ft_strlen(src);
-	if (size == 0)
-		return (srclen);
-	if (destlen >= size)
-		return (size + srclen);
-	while (src[i] && y < size - 1)
+	while (src[i] != '\0' && (ld + i < size - 1))
 	{
-		dst[y] = src[i];
-		y++;
+		dst[ld + i] = src[i];
 		i++;
 	}
-	dst[y] = '\0';
-	return (srclen + destlen);
+	dst[ld + i] = '\0';
+	return (ld + ls);
 }
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	*dst = "ae";
+// 	char	src[12] = "worl";
+
+// 	printf("%ld", ft_strlcat(src, dst, 12));
+// }

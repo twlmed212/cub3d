@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 16:38:54 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/18 17:12:13 by mtawil           ###   ########.fr       */
+/*   Created: 2024/11/08 16:24:41 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/11/13 22:21:40 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,36 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	char	*new;
 	size_t	i;
-	char	*str;
 
-	i = 0;
 	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
 		return (ft_strdup(""));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	str = malloc((len + 1) * sizeof(char));
-	if (!str)
+	i = 0;
+	if (len == 0)
+		return (ft_strdup(""));
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (start + len > ft_strlen(s))
+		len = ft_strlen(s) - start;
+	new = malloc(len + 1);
+	if (!new)
 		return (NULL);
 	while (i < len)
 	{
-		str[i] = s[i + start];
+		new[i] = s[start];
 		i++;
+		start++;
 	}
-	str[i] = '\0';
-	return (str);
+	new[i] = ('\0');
+	return (new);
 }
+// #include <stdio.h>
+// int main()
+// {
+
+// 		char h[5] = "aad";
+
+// 		printf("%s\n", ft_substr(h, 0, 7));
+
+// }

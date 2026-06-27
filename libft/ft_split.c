@@ -3,96 +3,113 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 09:35:51 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/18 18:16:03 by mtawil           ###   ########.fr       */
+/*   Created: 2024/11/10 23:29:07 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/11/15 19:39:10 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static int	total_words(char const *s, char c)
+static char	**free_split(char **result)
 {
 	int	i;
-	int	words;
-	int	found;
 
 	i = 0;
-	words = 0;
-	found = 1;
-	while (s[i])
+	while (result[i])
 	{
-		if (s[i] == c && found == 0)
-			found = 1;
-		else if (s[i] != c && found == 1)
-		{
-			found = 0;
-			words++;
-		}
+		free(result[i]);
 		i++;
 	}
-	return (words);
+	free(result);
+	return (NULL);
 }
 
-static void	free_memory(char **my_array, int i)
+static int	cw(const char *s, char c)
 {
-	while (i > 0)
-		free(my_array[--i]);
-	free(my_array);
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] != c && (i == 0 || s[i - 1] == c))
+			count++;
+		i++;
+	}
+	return (count);
 }
 
-static char	*get_next_word(const char **s, char c, int *start)
+static char	*copy_word(const char *start, int len)
 {
-	int		end;
 	char	*word;
 
-	while (**s && **s == c)
-		(*s)++;
-	*start = *s - (*s);
-	end = *start;
-	while ((*s)[end] && (*s)[end] != c)
-		end++;
-	word = ft_substr(*s, *start, end - *start);
-	*s += end;
+	word = malloc((len + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
+	ft_memcpy(word, start, len);
+	word[len] = '\0';
 	return (word);
 }
 
-static char	**fill_array(char **my_array, char const *s, int rows, char c)
+static size_t	ft_strlen_d(const char *str, char d)
 {
-	int		i;
-	int		start;
-	char	*word;
+	size_t	i;
 
 	i = 0;
-	while (i < rows)
+	while (str[i] && str[i] != d)
 	{
-		word = get_next_word(&s, c, &start);
-		my_array[i] = word;
-		if (!my_array[i])
-		{
-			free_memory(my_array, i);
-			return (NULL);
-		}
 		i++;
 	}
-	return (my_array);
+	return (i);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**my_array;
-	int		rows;
+	char	**result;
+	int		i;
 
 	if (!s)
 		return (NULL);
-	rows = total_words(s, c);
-	my_array = malloc((rows + 1) * sizeof(char *));
-	if (!my_array)
+	result = malloc((cw(s, c) + 1) * sizeof(char *));
+	if (!result)
 		return (NULL);
-	my_array = fill_array(my_array, s, rows, c);
-	if (my_array)
-		my_array[rows] = NULL;
-	return (my_array);
+	i = 0;
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		if (*s)
+		{
+			result[i] = copy_word(s, ft_strlen_d(s, c));
+			if (!result[i])
+				return (free_split(result));
+			i++;
+			s += ft_strlen_d(s, c);
+		}
+	}
+	result[i] = NULL;
+	return (result);
 }
+// int main()
+// {
+//     char *str = "            .     ";
+//     char delimiter = ' ';
+//     char **split_result = ft_split(str, delimiter);
+
+//     if (split_result)
+//     {
+//         int i = 0;
+//         while (split_result[i])
+//         {
+//             printf("Word %d:%s\n", i + 1, split_result[i]);
+//             i++;
+//         }
+
+//         free_split(split_result);
+//     }
+
+//     return (0);
+// }

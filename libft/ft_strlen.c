@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 18:16:40 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/17 11:22:19 by mtawil           ###   ########.fr       */
+/*   Created: 2024/10/28 15:56:07 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/11/13 14:49:35 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,10 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char *s="hello";
+// 	printf("%s\n",s);
+// 	printf("%d\n",ft_strlen(s));
+// }

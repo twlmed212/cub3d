@@ -3,16 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abmoudni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 22:46:38 by mtawil            #+#    #+#             */
-/*   Updated: 2024/11/17 14:41:50 by mtawil           ###   ########.fr       */
+/*   Created: 2024/10/28 15:49:26 by abmoudni          #+#    #+#             */
+/*   Updated: 2024/10/28 15:49:29 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, int n)
+void	ft_bzero(void *s, size_t n)
 {
-	ft_memset(s, 0, n);
+	char	*b;
+	size_t	i;
+
+	b = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		b[i] = '\0';
+		i++;
+	}
 }
+/*
+int	main(void){
+
+char	f[40] = "abdeGood";
+
+ft_bzero(f,4);
+
+
+printf("%s",f);
+
+
+}*/
