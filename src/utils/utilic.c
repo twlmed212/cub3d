@@ -1,4 +1,4 @@
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	ft_isspace(int c)
 {
@@ -6,8 +6,8 @@ int	ft_isspace(int c)
 		return (1);
 	return (0);
 }
-
-char	ft_strcmp(const char *s1, const char *s2)
+// this sohuld return int instead of char
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
 
