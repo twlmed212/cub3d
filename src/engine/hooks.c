@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/29 14:35:27 by mtawil            #+#    #+#             */
-/*   Updated: 2026/07/04 17:07:16 by mtawil           ###   ########.fr       */
+/*   Created: 2026/06/30 18:23:56 by mtawil            #+#    #+#             */
+/*   Updated: 2026/06/30 18:24:09 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int ac, char **av)
+
+int close_window(void *param)
 {
-	t_cub	*game;
+	t_cub *game;
 
-	if (ac != 2)
-	{
-		printf("Usage: ./cub3D <map.cub>\n");
-		exit(1);
-	}
-	game = ft_check(av);
+	game = (t_cub *)param;
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
+}
 
-	init_player(game);
-	init_engine(game);
-	mlx_hook(game->win, 2, 1L << 0, key_press, game);
-	mlx_hook(game->win, 17, 0, close_window, game);
-	mlx_loop_hook(game->mlx, render_frame, game);
-	mlx_loop(game->mlx);
+int key_press(int keycode, void *param)
+{
+	if (keycode == KEY_ESC)
+		close_window(param);
+	else if (keycode == KEY_LEFT)
+		printf("Left key pressed\n");
+	else if (keycode == KEY_RIGHT)
+		printf("Right key pressed\n");
 	return (0);
 }

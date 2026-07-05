@@ -25,6 +25,8 @@
 # define KEY_RIGHT  65363
 # define KEY_ESC    65307
 
+
+
 typedef struct s_img
 {
 	void	*ptr;
@@ -36,8 +38,12 @@ typedef struct s_img
 
 typedef struct s_p
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
+	double	dir_y;
+	double	dir_x;
+	double	plane_x;
+	double	plane_y;
 }	t_p;
 
 typedef struct s_cub
@@ -78,5 +84,6 @@ void	my_pixel_put(t_img *img, int x, int y, int color);
 int		render_frame(void *param);
 int		key_press(int keycode, void *param);
 int		close_window(void *param);
+void	init_player(t_cub *game);
 
 #endif

@@ -28,7 +28,8 @@ SRC =	src/main.c \
 		get_next_line/get_next_line.c \
 		src/engine/init.c \
 		src/engine/render.c \
-		src/engine/hooks.c
+		src/engine/hooks.c	\
+		src/engine/player.c
 
 OBJ = $(SRC:.c=.o)
 
