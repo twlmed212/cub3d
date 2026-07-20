@@ -37,6 +37,7 @@ t_cub *ft_check(char **av){
             printf("Error\nFailed to allocate memory for cub structure\n");
             exit(1);
         }
+        ft_bzero(cub, sizeof(t_cub));
         cub->fd = open_file(av[1]);
         ft_get_elements(cub);
         get_map(cub);
