@@ -2,18 +2,11 @@ NAME    = cub3D
 CC      = cc
 CFLAGS  = -Wall -Wextra -Werror -g
 
-UNAME = $(shell uname)
-ifeq ($(UNAME), Darwin)
-    MLX_DIR   = minilibx_mac
-    MLX_FLAGS = -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-else
-    MLX_DIR   = minilibx
-    MLX_FLAGS = -L $(MLX_DIR) -lmlx -lXext -lX11
-endif
-
-LIBFT = ./libft/libft.a
-LIBS  = -L ./libft -lft $(MLX_FLAGS) -lm
-INCS  = -I ./includes -I ./libft -I $(MLX_DIR)
+MLX_DIR = minilibx
+MLX     = $(MLX_DIR)/libmlx.a
+LIBFT   = ./libft/libft.a
+LIBS    = -L ./libft -lft -L $(MLX_DIR) -lmlx -lXext -lX11 -lm
+INCS    = -I ./includes -I ./libft -I $(MLX_DIR)
 
 SRC =	src/main.c \
 		src/parsing/ft_check.c \
@@ -29,6 +22,10 @@ SRC =	src/main.c \
 		src/engine/init.c \
 		src/engine/render.c \
 		src/engine/hooks.c	\
+		src/engine/dda.c	\
+		src/engine/move.c	\
+		src/engine/draw.c	\
+		src/engine/textures.c	\
 		src/engine/player.c
 
 OBJ = $(SRC:.c=.o)
@@ -36,11 +33,14 @@ OBJ = $(SRC:.c=.o)
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $@
 
 $(LIBFT):
 	$(MAKE) -C libft
+
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
 
 all: $(NAME)
 
