@@ -4,7 +4,7 @@ void	check_args(char **av,const char *ext)
 {
 	int	len;
 
-	len = strlen(av[1]);
+	len = ft_strlen(av[1]);
 
 	if (len < 5 || *(av[1] + len - 5) == '/')
 	{
