@@ -52,7 +52,7 @@ typedef struct s_ray
     int     step_x;
     int     step_y;
     int     side;
-    double  perp_dist;
+    double  cam_distance;
     int     line_h;
     int     draw_start;
     int     draw_end;
