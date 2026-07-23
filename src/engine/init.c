@@ -15,12 +15,14 @@
 void	init_engine(t_cub *game)
 {
 	game->mlx = mlx_init();
-	if (!game->mlx){
+	if (!game->mlx)
+	{
 		printf("Error: mlx init failed!\n");
 		exit(1);
 	}
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "Mok3ab3D");
-	if (!game->win){
+	if (!game->win)
+	{
 		printf("Error: mlx new window failed!");
 		exit(1);
 	}
@@ -31,5 +33,5 @@ void	init_engine(t_cub *game)
 		exit(1);
 	}
 	game->img.data = mlx_get_data_addr(game->img.ptr, &game->img.bpp,
-			 &game->img.line_len, &game->img.endian);
+			&game->img.line_len, &game->img.endian);
 }

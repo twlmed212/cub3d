@@ -37,8 +37,8 @@ static int	tex_column(t_cub *game, t_ray *ray, t_tex *t)
 		wall_x = game->player.x + ray->cam_distance * ray->ray_dir_x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * t->width);
-	if ((ray->side == 0 && ray->ray_dir_x > 0)
-		|| (ray->side == 1 && ray->ray_dir_y < 0))
+	if ((ray->side == 0 && ray->ray_dir_x > 0) || (ray->side == 1
+			&& ray->ray_dir_y < 0))
 		tex_x = t->width - tex_x - 1;
 	return (tex_x);
 }

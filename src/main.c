@@ -6,7 +6,7 @@
 /*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 14:35:27 by mtawil            #+#    #+#             */
-/*   Updated: 2026/07/20 11:11:27 by mtawil           ###   ########.fr       */
+/*   Updated: 2026/07/23 14:54:07 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	game = ft_check(av);
 	init_player(game);
 	init_engine(game);
-	init_textures(game);// for debug porpuse, this needs to parse by abdo
+	init_textures(game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
 	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_loop_hook(game->mlx, render_frame, game);

@@ -70,7 +70,6 @@ static void	init_step_y(t_cub *game, t_ray *ray)
 	}
 }
 
-
 void	cast_ray(t_cub *game, t_ray *ray, int x)
 {
 	init_ray(game, ray, x);
