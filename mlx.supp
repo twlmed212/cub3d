@@ -1,3 +1,4 @@
+# valgrind --leak-check=full --suppressions=mlx.supp ./cub3D maps/a1.cub
 # Valgrind suppressions for known X11 / MiniLibX internal leaks.
 # These libraries allocate global state they never free — not our bugs.
 # Focus your attention on "definitely lost" blocks coming from src/ files.
@@ -37,4 +38,18 @@
    Memcheck:Leak
    ...
    obj:*/libXcursor.so*
+}
+{
+   mlx_x11_writev_uninitialised
+   Memcheck:Param
+   writev(vector[0])
+   ...
+   obj:*/libxcb.so*
+}
+{
+   mlx_x11_write_uninitialised
+   Memcheck:Param
+   write(buf)
+   ...
+   obj:*/libX11.so*
 }
