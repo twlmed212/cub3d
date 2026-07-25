@@ -12,6 +12,24 @@
 
 #include "../../includes/cub3d.h"
 
+// a run of spaces must end on a wall (or on the end of the row)
+int	space_run_ok(char *row, int x)
+{
+	int	l;
+	int	f;
+
+	l = x;
+	f = 0;
+	while (row[l] && ft_isspace(row[l]))
+	{
+		f = 1;
+		l++;
+	}
+	if (row[l] && row[l] != '1' && f == 1)
+		return (0);
+	return (1);
+}
+
 static int	count_id(char ***e, char *id)
 {
 	int	i;

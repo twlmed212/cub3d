@@ -40,8 +40,6 @@ void	print_pars_elem(char *message)
 static void	*ft_parse_elem(t_cub *game, char **map, int y, int *x)
 {
 	int	type;
-	int	l;
-	int	f;
 
 	while (map[y][*x])
 	{
@@ -56,12 +54,9 @@ static void	*ft_parse_elem(t_cub *game, char **map, int y, int *x)
 		if (map[y][*x] && map[y][*x - 1] != '1' && ft_isspace(map[y][*x]))
 			return (print_pars_elem("spaces are not surronded by walls"),
 				NULL);
-		l = *x;
-		f = 0;
-		while (map[y][l] && ft_isspace(map[y][(l)++]))
-			f = 1;
-		if (map[y][l] && map[y][l] != '1' && f == 1)
-			return (print_pars_elem("spaces are not surronded by walls"), NULL);
+		if (!space_run_ok(map[y], *x))
+			return (print_pars_elem("spaces are not surronded by walls"),
+				NULL);
 	}
 	return ((void *)1);
 }
