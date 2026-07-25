@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 23:29:07 by abmoudni          #+#    #+#             */
-/*   Updated: 2024/11/15 19:39:10 by abmoudni         ###   ########.fr       */
+/*   Updated: 2026/07/25 10:44:14 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static char	**free_split(char **result)
-{
-	int	i;
-
-	i = 0;
-	while (result[i])
-	{
-		free(result[i]);
-		i++;
-	}
-	free(result);
-	return (NULL);
-}
 
 static int	cw(const char *s, char c)
 {
@@ -46,7 +32,7 @@ static char	*copy_word(const char *start, int len)
 {
 	char	*word;
 
-	word = malloc((len + 1) * sizeof(char));
+	word = ft_malloc((len + 1) * sizeof(char));
 	if (!word)
 		return (NULL);
 	ft_memcpy(word, start, len);
@@ -73,7 +59,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	result = malloc((cw(s, c) + 1) * sizeof(char *));
+	result = ft_malloc((cw(s, c) + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
 	i = 0;
@@ -85,7 +71,7 @@ char	**ft_split(char const *s, char c)
 		{
 			result[i] = copy_word(s, ft_strlen_d(s, c));
 			if (!result[i])
-				return (free_split(result));
+				return (NULL);
 			i++;
 			s += ft_strlen_d(s, c);
 		}
@@ -93,23 +79,3 @@ char	**ft_split(char const *s, char c)
 	result[i] = NULL;
 	return (result);
 }
-// int main()
-// {
-//     char *str = "            .     ";
-//     char delimiter = ' ';
-//     char **split_result = ft_split(str, delimiter);
-
-//     if (split_result)
-//     {
-//         int i = 0;
-//         while (split_result[i])
-//         {
-//             printf("Word %d:%s\n", i + 1, split_result[i]);
-//             i++;
-//         }
-
-//         free_split(split_result);
-//     }
-
-//     return (0);
-// }

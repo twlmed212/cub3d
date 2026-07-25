@@ -23,10 +23,9 @@ static void	*check_line(int fd)
 	{
 		remove_newline(line);
 		if (!*line)
-			return (free(line), (void *)1);
+			return ((void *)1);
 		if (*line != '\n' && !ft_check_content(line))
-			return (free(line), printf("The map is sperited\n"), NULL);
-		free(line);
+			return (printf("The map is sperited\n"), NULL);
 		line = get_next_line(fd, &flag);
 	}
 	return ((void *)1);
@@ -49,7 +48,7 @@ void	*add_map(char **line, char *str)
 	char	**lines;
 	int		i;
 
-	lines = malloc((con_table(line) + 2) * sizeof(char *));
+	lines = ft_malloc((con_table(line) + 2) * sizeof(char *));
 	if (!lines)
 		return (NULL);
 	i = 0;
@@ -60,7 +59,6 @@ void	*add_map(char **line, char *str)
 	}
 	lines[i++] = str;
 	lines[i] = NULL;
-	free(line);
 	return (lines);
 }
 
@@ -82,7 +80,7 @@ static char	**fill_map(t_cub *cub, int *flag)
 		if (line)
 			remove_newline(line);
 	}
-	return (free(line), lines);
+	return (lines);
 }
 
 void	*get_map(t_cub *cub)
@@ -95,6 +93,6 @@ void	*get_map(t_cub *cub)
 	if (!lines)
 		return (NULL);
 	if (!check_line(cub->fd))
-		return (ft_free_tab(lines), NULL);
+		return (NULL);
 	return (ft_check_map(cub, lines));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elements.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 06:29:24 by abmoudni          #+#    #+#             */
-/*   Updated: 2026/07/23 07:39:56 by abmoudni         ###   ########.fr       */
+/*   Updated: 2026/07/25 10:22:02 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,6 @@ void	check_color(char **element, t_cub *cub, char *id)
 		cub->floor_color = ft_get_color(str[0], str[1], str[2]);
 	else
 		cub->ceiling_color = ft_get_color(str[0], str[1], str[2]);
-	free(str);
-	ft_free_tab(rgb);
-}
-
-void	check_elements(t_cub *cub, char ***elements)
-{
-	int	i;
-
-	i = 0;
-	while (elements[i])
-	{
-		if (ft_strncmp(elements[i][0], "NO", 2) == 0)
-			check_texture(elements[i], "NO");
-		else if (ft_strncmp(elements[i][0], "SO", 2) == 0)
-			check_texture(elements[i], "SO");
-		else if (ft_strncmp(elements[i][0], "WE", 2) == 0)
-			check_texture(elements[i], "WE");
-		else if (ft_strncmp(elements[i][0], "EA", 2) == 0)
-			check_texture(elements[i], "EA");
-		else if (ft_strncmp(elements[i][0], "F", 1) == 0)
-			check_color(elements[i], cub, "F");
-		else if (ft_strncmp(elements[i][0], "C", 1) == 0)
-			check_color(elements[i], cub, "C");
-		else
-		{
-			printf("Error\nInvalid element identifier or wrong extension: %s\n",
-				elements[i][0]);
-			exit(1);
-		}
-		i++;
-	}
 }
 
 static int	read_six(t_cub *cub)
@@ -99,9 +68,10 @@ void	*ft_get_elements(t_cub *cub)
 {
 	char	***elements;
 
-	cub->elem = malloc(sizeof(char *) * 7);
+	cub->elem = ft_malloc(sizeof(char *) * 7);
 	if (!(cub->elem))
 		return (NULL);
+	cub->elem[0] = NULL;
 	if (!read_six(cub))
 		return (NULL);
 	elements = split_elements(cub->elem);
@@ -109,10 +79,6 @@ void	*ft_get_elements(t_cub *cub)
 		return (print_error_get_elem("Malloc failed"), NULL);
 	check_elements(cub, elements);
 	if (!valid_ids(elements))
-	{
-		free_elements(elements);
 		print_error("Duplicate or missing element", NULL);
-	}
-	free_elements(elements);
 	return (cub);
 }

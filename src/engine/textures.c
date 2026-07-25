@@ -26,7 +26,6 @@ static char	*find_path(t_cub *game, char *id)
 		sp = ft_split(game->elem[i], ' ');
 		if (sp && sp[0] && sp[1] && !ft_strcmp(sp[0], id))
 			path = ft_strdup(sp[1]);
-		ft_free_tab(sp);
 		if (path)
 			return (path);
 		i++;
@@ -39,13 +38,14 @@ static void	load_one(t_cub *game, t_tex *t, char *path)
 	if (!path)
 	{
 		printf("Error\ntexture path missing\n");
+		free_grabage();
 		exit(1);
 	}
 	t->ptr = mlx_xpm_file_to_image(game->mlx, path, &t->width, &t->height);
-	free(path);
 	if (!t->ptr)
 	{
 		printf("Error\nfailed to load texture\n");
+		free_grabage();
 		exit(1);
 	}
 	t->data = mlx_get_data_addr(t->ptr, &t->bpp, &t->line_len, &t->endian);

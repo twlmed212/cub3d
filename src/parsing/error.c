@@ -20,6 +20,7 @@ void	print_error(const char *message, const char *id)
 	else
 		printf("%s", message);
 	printf("\n");
+	free_grabage();
 	exit(1);
 }
 
@@ -31,6 +32,7 @@ void	print_error_get_elem(char *message)
 void	print_error_rgb(const char *message)
 {
 	printf("Error\n%s\n", message);
+	free_grabage();
 	exit(1);
 }
 
@@ -42,5 +44,6 @@ void	error_space(char *message)
 void	print_error_map(char *message)
 {
 	printf("Error\n%s\n", message);
+	free_grabage();
 	exit(1);
 }

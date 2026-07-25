@@ -37,9 +37,7 @@ int	close_window(void *param)
 		mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
-	ft_free_tab(game->map);
-	ft_free_tab(game->elem);
-	free(game);
+	free_grabage();
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 23:54:03 by abmoudni          #+#    #+#             */
-/*   Updated: 2026/06/27 21:00:42 by mtawil           ###   ########.fr       */
+/*   Updated: 2026/07/25 10:48:59 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,11 @@ static char	*extract_line(char **str)
 	{
 		line = ft_substr(*str, 0, line_pos + 1);
 		temp = ft_substr(*str, line_pos + 1, ft_strlen(*str) - line_pos - 1);
-		free(*str);
 		*str = temp;
 	}
 	else
 	{
 		line = ft_strdup(*str);
-		free(*str);
 		*str = NULL;
 	}
 	return (line);
@@ -60,7 +58,7 @@ static char	*read_line(int fd, char *new, char *buff)
 	{
 		n = read(fd, buff, (size_t)BUFFER_SIZE);
 		if (n == -1)
-			return (free(buff), free(new), NULL);
+			return (free(buff), NULL);
 		if (n == 0)
 			break ;
 		buff[n] = '\0';
@@ -69,21 +67,21 @@ static char	*read_line(int fd, char *new, char *buff)
 		else
 		{
 			temp = ft_strjoin(new, buff);
-			free(new);
 			new = temp;
 		}
 	}
 	return (free(buff), new);
 }
 
-char	*get_next_line(int fd,int *flag)
+char	*get_next_line(int fd, int *flag)
 {
 	static char	*new = NULL;
 	char		*line;
 	char		*buff;
 
 	buff = malloc((size_t)BUFFER_SIZE + 1);
-	if (!buff){
+	if (!buff)
+	{
 		printf("Malloc failed");
 		new = NULL;
 		return (NULL);
@@ -92,7 +90,6 @@ char	*get_next_line(int fd,int *flag)
 	if (!new || *new == '\0')
 	{
 		*flag = 1;
-		free(new);
 		new = NULL;
 		return (NULL);
 	}
@@ -104,15 +101,3 @@ char	*get_next_line(int fd,int *flag)
 	}
 	return (line);
 }
-
-// int	main(void)
-// {
-// 	char *line;
-// 	int fd;
-//     fd = open("1p88i.txt", O_CREAT,0600);
-// 	while((line = get_next_line(fd)))
-// 	{
-// 		printf("%s",line);
-// 		free(line);
-// 	}
-// }

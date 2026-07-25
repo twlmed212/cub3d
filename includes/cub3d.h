@@ -6,7 +6,7 @@
 /*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 14:44:09 by mtawil            #+#    #+#             */
-/*   Updated: 2026/07/23 14:44:10 by mtawil           ###   ########.fr       */
+/*   Updated: 2026/07/25 10:35:21 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 
 # define MOVE_SPEED  0.1
 # define ROT_SPEED   0.05
+
+# define INF_DIST    1e30
 
 typedef struct s_tex
 {
@@ -123,9 +125,9 @@ void			print_error_get_elem(char *message);
 void			print_error(const char *message, const char *id);
 void			error_space(char *message);
 void			print_error_map(char *message);
-void			ft_free_tab(char **tab);
-void			free_elements(char ***e);
 int				valid_ids(char ***e);
+void			check_elements(t_cub *cub, char ***elements);
+void			check_color(char **element, t_cub *cub, char *id);
 
 /* engine */
 void			init_engine(t_cub *game);
@@ -141,5 +143,15 @@ void			rotate(t_cub *game, double a);
 void			init_textures(t_cub *game);
 void			calc_wall(t_ray *ray);
 void			draw_column(t_cub *game, t_ray *ray, int x);
+
+/* garber colletor */
+typedef struct s_gc
+{
+	void		*data;
+	struct s_gc	*next;
+}	t_gc;
+
+void			*ft_malloc(size_t size);
+void			free_grabage(void);
 
 #endif

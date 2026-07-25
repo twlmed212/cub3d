@@ -19,6 +19,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 	{
 		printf("Usage: ./cub3D <map.cub>\n");
+		free_grabage();
 		exit(1);
 	}
 	game = ft_check(av);

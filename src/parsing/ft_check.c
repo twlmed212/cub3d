@@ -30,11 +30,13 @@ void	check_ext(char *str, char *ext)
 	if (len <= 4 || *(str + len - 5) == '/')
 	{
 		printf("Error\nfilename invalide\n");
+		free_grabage();
 		exit(1);
 	}
 	if (ft_strcmp(str + len - 4, ext))
 	{
 		printf("Error\nWrong extantion name\n");
+		free_grabage();
 		exit(1);
 	}
 }
@@ -43,17 +45,18 @@ static t_cub	*new_cub(char *path)
 {
 	t_cub	*cub;
 
-	cub = malloc(sizeof(t_cub));
+	cub = ft_malloc(sizeof(t_cub));
 	if (!cub)
 	{
 		printf("Error\nFailed to allocate memory for cub structure\n");
+		free_grabage();
 		exit(1);
 	}
 	ft_bzero(cub, sizeof(t_cub));
 	cub->fd = open_file(path);
 	if (cub->fd < 0)
 	{
-		free(cub);
+		free_grabage();
 		exit(1);
 	}
 	return (cub);
@@ -68,14 +71,13 @@ t_cub	*ft_check(char **av)
 	if (!ft_get_elements(cub))
 	{
 		close(cub->fd);
-		free(cub);
+		free_grabage();
 		exit(1);
 	}
 	if (!get_map(cub))
 	{
-		ft_free_tab(cub->elem);
-		free(cub);
 		printf("Error\nInvalid map\n");
+		free_grabage();
 		exit(1);
 	}
 	return (cub);

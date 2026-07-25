@@ -39,7 +39,7 @@ char	***split_elements(char **cub_elem)
 	char	***elements;
 	int		i;
 
-	elements = malloc(sizeof(char **) * (count_element(cub_elem) + 1));
+	elements = ft_malloc(sizeof(char **) * (count_element(cub_elem) + 1));
 	if (!elements)
 		return (NULL);
 	i = 0;
@@ -49,6 +49,7 @@ char	***split_elements(char **cub_elem)
 		if (!elements[i])
 		{
 			printf("Error\nFailed to split element line\n");
+			free_grabage();
 			exit(1);
 		}
 		i++;
@@ -65,6 +66,7 @@ void	print_texture(const char *message, const char *id)
 	else
 		printf("%s", message);
 	printf("\n");
+	free_grabage();
 	exit(1);
 }
 
@@ -93,7 +95,7 @@ unsigned char	*check_rgb_values(char **rgb)
 	int				n;
 	unsigned char	*str;
 
-	str = malloc(3);
+	str = ft_malloc(3);
 	if (!str)
 		print_error_rgb("Malloc failed");
 	i = 0;

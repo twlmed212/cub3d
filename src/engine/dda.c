@@ -31,11 +31,11 @@ static void	init_ray(t_cub *game, t_ray *ray, int x)
 	ray->map_x = (int)game->player.x;
 	ray->map_y = (int)game->player.y;
 	if (ray->ray_dir_x == 0)
-		ray->delta_dist_x = 1e30;
+		ray->delta_dist_x = INF_DIST;
 	else
 		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
 	if (ray->ray_dir_y == 0)
-		ray->delta_dist_y = 1e30;
+		ray->delta_dist_y = INF_DIST;
 	else
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 }

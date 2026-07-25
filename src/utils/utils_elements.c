@@ -40,7 +40,6 @@ void	*ft_find_data(int fd, int *flag)
 			return (NULL);
 		if (!ft_check_content(str) && *str != '\n')
 			break ;
-		free(str);
 	}
 	return (str);
 }
