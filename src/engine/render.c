@@ -16,6 +16,8 @@ void	my_pixel_put(t_tex *img, int x, int y, int color)
 {
 	char	*dst;
 
+	if (x < 0 || x >= WIN_WIDTH || y < 0 || y >= WIN_HEIGHT)
+		return ;
 	dst = img->data + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
