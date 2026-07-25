@@ -23,7 +23,7 @@ static int	touch_wall(t_cub *game, double x, double y)
 		return (1);
 	if (mx >= (int)ft_strlen(game->map[my]))
 		return (1);
-	return (game->map[my][mx] == '1');
+	return (game->map[my][mx] != '0');
 }
 
 // check each axe alone so we slide on walls insted of stoping

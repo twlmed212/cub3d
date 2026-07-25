@@ -14,10 +14,13 @@ SRC =	src/main.c \
 		src/parsing/get_map.c \
 		src/parsing/elements.c \
 		src/parsing/map_elements.c \
-		src/parsing/ft_food_fill.c \
-		src/parsing/chech_walls.c \
+		src/parsing/check_walls.c \
 		src/parsing/check_map.c \
-		src/utils/utilic.c \
+		src/parsing/error.c \
+		src/utils/utils.c \
+		src/utils/utils_elements.c \
+		src/utils/utils_elements1.c \
+		src/utils/utils_check_walls.c \
 		get_next_line/get_next_line.c \
 		src/engine/init.c \
 		src/engine/render.c \
@@ -54,4 +57,18 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+# check the norm on our own code only (skip libft / minilibx / gnl)
+norm:
+	norminette includes/ src/
+
+# run under a virtual display + valgrind, auto-close via ESC so it exits clean
+leak: all
+	xvfb-run -a --server-args="-screen 0 1280x720x24" bash -c '\
+		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \
+			--suppressions=mlx.supp ./cub3D maps/a3.cub & \
+		VP=$$!; sleep 5; \
+		WID=$$(xdotool search --name Mok3ab3D | head -1); \
+		xdotool key --window $$WID Escape; \
+		wait $$VP'
+
+.PHONY: all clean fclean re norm leak

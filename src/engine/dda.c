@@ -18,7 +18,7 @@ static int	is_wall(t_cub *game, int x, int y)
 		return (1);
 	if (x >= (int)ft_strlen(game->map[y]))
 		return (1);
-	return (game->map[y][x] == '1');
+	return (game->map[y][x] != '0');
 }
 
 static void	init_ray(t_cub *game, t_ray *ray, int x)

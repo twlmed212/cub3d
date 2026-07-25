@@ -1,44 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/23 06:29:37 by abmoudni          #+#    #+#             */
+/*   Updated: 2026/07/23 07:23:09 by abmoudni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-static void *check_line(int fd)
+static void	*check_line(int fd)
 {
-    char    *line;
-    int     flag = 0;
-    
-    while (1)
-    {
-        line = get_next_line(fd, &flag);
-        if (!line)
-        {
-            if (flag == 1)
-                break; // الخروج هنا آمن لأن line هو NULL بالفعل
-            return (NULL);
-        }
-        
-        remove_newline(line);
-        // تأكد أن remove_newline لا تغير قيمة المؤشر line بل تغير المحتوى فقط
-        
-        if (!*line)
-        {
-            free(line); // يجب تنظيف السطر الفارغ قبل عمل break!
-            line = NULL;
-            break ;
-        }
-        
-if (*line != '\n' && !ft_check_content(line))
-{
-    printf("The map is sperited\n");
-    // free(line); <-- قمنا بحذف هذا السطر لأنه تم تفريغه داخل ft_check_content
-    line = NULL; 
-    return (NULL);
+	char	*line;
+	int		flag;
+
+	flag = 0;
+	line = get_next_line(fd, &flag);
+	while (line)
+	{
+		remove_newline(line);
+		if (!*line)
+			return (free(line), (void *)1);
+		if (*line != '\n' && !ft_check_content(line))
+			return (free(line), printf("The map is sperited\n"), NULL);
+		free(line);
+		line = get_next_line(fd, &flag);
+	}
+	return ((void *)1);
 }
-        
-        // إذا مر السطر بسلام، نقوم بتفريغه وتصفيره للاستعداد للسطر القادم
-        free(line);
-        line = NULL; 
-    }
-    return ((void *)1);
-}
+
 size_t	con_table(char **elem)
 {
 	size_t	i;
@@ -50,6 +43,7 @@ size_t	con_table(char **elem)
 		i++;
 	return (i);
 }
+
 void	*add_map(char **line, char *str)
 {
 	char	**lines;
@@ -69,40 +63,38 @@ void	*add_map(char **line, char *str)
 	free(line);
 	return (lines);
 }
- 
-void *get_map(t_cub *cub){
 
-    char	*line;
+static char	**fill_map(t_cub *cub, int *flag)
+{
+	char	*line;
 	char	**lines;
-	int 	flag = 0;
+
 	lines = NULL;
-	line = ft_find_data(cub->fd,&flag); // Get the first line of the map, skipping empty lines and lines with only spaces //هاد function كتقلب على أول line فيها content.
-	if (!line && flag == 1)
+	line = ft_find_data(cub->fd, flag);
+	if (!line && *flag == 1)
+		print_error_map("map not found");
+	while (line && *line && !ft_check_content(line) && *line != '\n')
 	{
-		printf("map not found\n");
-		exit(1);
-	}
-	while (1)
-	{
-		if (!line)
-			return (NULL);
-		if (!*line || ft_check_content(line) || *line == '\n') // If the line is empty, contains only spaces, or is a newline, it indicates the end of the map.
-			break ;
-		lines = add_map(lines, line); // Add the line to the table. This function reallocates the table to accommodate the new line and adds it to the end of the table.
+		lines = add_map(lines, line);
 		if (!lines)
 			return (NULL);
-		line = get_next_line(cub->fd,&flag);// Get the next line of the map.
-		if (!line)
-		{
-    	if (flag == 1)
-        	break;
-    	return NULL;
-		}
-		remove_newline(line);
+		line = get_next_line(cub->fd, flag);
+		if (line)
+			remove_newline(line);
 	}
-
-	if (!check_line(cub->fd))
-		return (free(line),NULL);
-	return (free(line), ft_check_map(cub, lines));
+	return (free(line), lines);
 }
 
+void	*get_map(t_cub *cub)
+{
+	char	**lines;
+	int		flag;
+
+	flag = 0;
+	lines = fill_map(cub, &flag);
+	if (!lines)
+		return (NULL);
+	if (!check_line(cub->fd))
+		return (ft_free_tab(lines), NULL);
+	return (ft_check_map(cub, lines));
+}

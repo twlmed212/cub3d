@@ -1,0 +1,40 @@
+# Valgrind suppressions for known X11 / MiniLibX internal leaks.
+# These libraries allocate global state they never free — not our bugs.
+# Focus your attention on "definitely lost" blocks coming from src/ files.
+
+{
+   mlx_XOpenDisplay_reachable
+   Memcheck:Leak
+   ...
+   obj:*/libX11.so*
+}
+{
+   mlx_xcb_internal
+   Memcheck:Leak
+   ...
+   obj:*/libxcb.so*
+}
+{
+   mlx_xext_internal
+   Memcheck:Leak
+   ...
+   obj:*/libXext.so*
+}
+{
+   mlx_dl_loader
+   Memcheck:Leak
+   ...
+   obj:*/ld-*.so*
+}
+{
+   mlx_libc_dlopen
+   Memcheck:Leak
+   ...
+   fun:_dl_catch_exception
+}
+{
+   mlx_XcursorInternal
+   Memcheck:Leak
+   ...
+   obj:*/libXcursor.so*
+}

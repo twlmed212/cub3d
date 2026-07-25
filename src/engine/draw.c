@@ -85,12 +85,12 @@ void	draw_column(t_cub *game, t_ray *ray, int x)
 	tpos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_h / 2) * step;
 	y = -1;
 	while (++y < ray->draw_start)
-		my_pixel_put(&game->img, x, y, 0x0000AACC);
+		my_pixel_put(&game->img, x, y, game->ceiling_color);
 	while (y <= ray->draw_end)
 	{
 		my_pixel_put(&game->img, x, y++, tex_color(wall_tex, tx, (int)tpos));
 		tpos += step;
 	}
 	while (y < WIN_HEIGHT)
-		my_pixel_put(&game->img, x, y++, 0x00555555);
+		my_pixel_put(&game->img, x, y++, game->floor_color);
 }

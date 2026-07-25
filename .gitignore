@@ -2,3 +2,5 @@
 /subject
 .DS_Store
 ROADMAP.md
+.*
+.vscode

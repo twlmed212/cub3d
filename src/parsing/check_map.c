@@ -1,34 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/23 06:29:13 by abmoudni          #+#    #+#             */
+/*   Updated: 2026/07/23 08:15:02 by abmoudni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-
-static void	conver_spaces(char **str)
+void	ft_free_tab(char **str)
 {
 	int	i;
-	int	j;
 
 	i = 0;
+	if (!str)
+		return ;
 	while (str[i])
 	{
-		j = 0;
-		while (str[i][j])
-		{
-			if (ft_isspace(str[i][j]))
-				str[i][j] = '1';
-			j++;
-		}
+		free(str[i]);
 		i++;
 	}
+	free(str);
 }
-void	*ft_check_map(t_cub *game, char **table)
-{
-	if (!check_map_walls(table))
-		return (ft_free_tab(table), NULL);
-	if (!ft_map_elements(game, table))
-		return (ft_free_tab(table), NULL);
-	game->map = table;
 
-	close(game->fd);
-	game->fd = -1;
-	conver_spaces(game->map);
-    flood_fill(game);
-return ((void *)1);}
+void	free_elements(char ***e)
+{
+	int	i;
+
+	i = 0;
+	if (!e)
+		return ;
+	while (e[i])
+		ft_free_tab(e[i++]);
+	free(e);
+}
+
+void	*ft_check_map(t_cub *cub, char **map)
+{
+	if (!check_map_walls(map))
+		return (ft_free_tab(map), NULL);
+	if (!ft_map_elements(cub, map))
+		return (ft_free_tab(map), NULL);
+	cub->map = map;
+	close(cub->fd);
+	cub->fd = -1;
+	return ((void *)1);
+}
