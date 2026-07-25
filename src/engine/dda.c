@@ -14,7 +14,14 @@
 
 static int	is_wall(t_cub *game, int x, int y)
 {
-	if (y < 0 || x < 0 || !game->map[y])
+	int	h;
+
+	if (y < 0 || x < 0 || !game->map)
+		return (1);
+	h = 0;
+	while (game->map[h])
+		h++;
+	if (y >= h)
 		return (1);
 	if (x >= (int)ft_strlen(game->map[y]))
 		return (1);

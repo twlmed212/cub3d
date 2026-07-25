@@ -47,6 +47,8 @@ static int	tex_color(t_tex *tex, int tex_x, int tex_y)
 {
 	char	*px;
 
+	if (!tex || !tex->data || tex->width <= 0 || tex->height <= 0)
+		return (0);
 	if (tex_x < 0)
 		tex_x = 0;
 	if (tex_y < 0)
@@ -64,6 +66,8 @@ void	calc_wall(t_ray *ray)
 	if (ray->cam_distance <= 0)
 		ray->cam_distance = 1e-6;
 	ray->line_h = (int)(WIN_HEIGHT / ray->cam_distance);
+	if (ray->line_h == 0)
+		ray->line_h = 1;
 	ray->draw_start = -ray->line_h / 2 + WIN_HEIGHT / 2;
 	ray->draw_end = ray->line_h / 2 + WIN_HEIGHT / 2;
 	if (ray->draw_start < 0)

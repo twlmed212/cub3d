@@ -16,10 +16,16 @@ static int	touch_wall(t_cub *game, double x, double y)
 {
 	int	mx;
 	int	my;
+	int	h;
 
 	mx = (int)x;
 	my = (int)y;
-	if (my < 0 || mx < 0 || !game->map[my])
+	if (my < 0 || mx < 0 || !game->map)
+		return (1);
+	h = 0;
+	while (game->map[h])
+		h++;
+	if (my >= h)
 		return (1);
 	if (mx >= (int)ft_strlen(game->map[my]))
 		return (1);
