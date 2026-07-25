@@ -6,7 +6,7 @@
 /*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 14:44:09 by mtawil            #+#    #+#             */
-/*   Updated: 2026/07/25 10:35:21 by mtawil           ###   ########.fr       */
+/*   Updated: 2026/07/25 13:29:19 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ void			rotate(t_cub *game, double a);
 void			init_textures(t_cub *game);
 void			calc_wall(t_ray *ray);
 void			draw_column(t_cub *game, t_ray *ray, int x);
+int				is_wall_point(t_cub *game, double x, double y);
+int				touch_wall(t_cub *game, double x, double y);
 
 /* garber colletor */
 typedef struct s_gc

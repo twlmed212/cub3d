@@ -6,13 +6,12 @@
 /*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 11:00:00 by mtawil            #+#    #+#             */
-/*   Updated: 2026/07/20 11:09:32 by mtawil           ###   ########.fr       */
+/*   Updated: 2026/07/25 13:27:47 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// look in the parsed elem lines ("NO path", "SO path"..) and give back the path
 static char	*find_path(t_cub *game, char *id)
 {
 	int		i;
@@ -51,7 +50,6 @@ static void	load_one(t_cub *game, t_tex *t, char *path)
 	t->data = mlx_get_data_addr(t->ptr, &t->bpp, &t->line_len, &t->endian);
 }
 
-// 0 = NO, 1 = SO, 2 = WE, 3 = EA .. paths come from abdo parsing now
 void	init_textures(t_cub *game)
 {
 	load_one(game, &game->tex[0], find_path(game, "NO"));

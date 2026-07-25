@@ -6,7 +6,7 @@
 /*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 11:10:00 by mtawil            #+#    #+#             */
-/*   Updated: 2026/07/20 11:17:06 by mtawil           ###   ########.fr       */
+/*   Updated: 2026/07/25 13:27:38 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	pick_tex(t_ray *ray)
 	return (1);
 }
 
-// wich column of the texture the ray hited
 static int	tex_column(t_cub *game, t_ray *ray, t_tex *t)
 {
 	double	wall_x;
@@ -80,7 +79,6 @@ void	calc_wall(t_ray *ray)
 		ray->draw_end = WIN_HEIGHT - 1;
 }
 
-// ceiling then wall then floor
 void	draw_column(t_cub *game, t_ray *ray, int x)
 {
 	t_tex	*wall_tex;

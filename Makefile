@@ -28,6 +28,7 @@ SRC =	src/main.c \
 		src/engine/hooks.c	\
 		src/engine/dda.c	\
 		src/engine/move.c	\
+		src/engine/move2.c	\
 		src/engine/draw.c	\
 		src/engine/textures.c	\
 		src/engine/player.c

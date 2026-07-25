@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utlis_check_walls.c                                :+:      :+:    :+:   */
+/*   utils_check_walls.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 07:04:20 by abmoudni          #+#    #+#             */
-/*   Updated: 2026/07/23 07:29:16 by abmoudni         ###   ########.fr       */
+/*   Updated: 2026/07/25 13:27:54 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// a run of spaces must end on a wall (or on the end of the row)
 int	space_run_ok(char *row, int x)
 {
 	int	l;
