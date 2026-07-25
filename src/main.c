@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 14:35:27 by mtawil            #+#    #+#             */
-/*   Updated: 2026/07/23 14:54:07 by mtawil           ###   ########.fr       */
+/*   Updated: 2026/07/25 14:16:33 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int ac, char **av)
 	if (ac != 2)
 	{
 		ft_putstr_fd("Usage: ./cub3D <map.cub>\n", 2);
-		free_grabage();
 		exit(1);
 	}
 	game = ft_check(av);

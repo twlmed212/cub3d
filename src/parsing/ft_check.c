@@ -6,7 +6,7 @@
 /*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 06:29:29 by abmoudni          #+#    #+#             */
-/*   Updated: 2026/07/23 07:09:42 by abmoudni         ###   ########.fr       */
+/*   Updated: 2026/07/25 14:17:16 by abmoudni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ void	check_ext(char *str, char *ext)
 	if (len <= 4 || *(str + len - 5) == '/')
 	{
 		ft_putstr_fd("Error\nfilename invalide\n", 2);
-		free_grabage();
 		exit(1);
 	}
 	if (ft_strcmp(str + len - 4, ext))
 	{
 		ft_putstr_fd("Error\nWrong extantion name\n", 2);
-		free_grabage();
 		exit(1);
 	}
 }
@@ -49,7 +47,6 @@ static t_cub	*new_cub(char *path)
 	if (!cub)
 	{
 		ft_putstr_fd("Error\nAllocation failed\n", 2);
-		free_grabage();
 		exit(1);
 	}
 	ft_bzero(cub, sizeof(t_cub));
