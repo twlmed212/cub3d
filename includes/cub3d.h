@@ -125,6 +125,7 @@ void			error_space(char *message);
 void			print_error_map(char *message);
 void			ft_free_tab(char **tab);
 void			free_elements(char ***e);
+int				valid_ids(char ***e);
 
 /* engine */
 void			init_engine(t_cub *game);

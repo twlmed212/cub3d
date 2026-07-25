@@ -108,6 +108,11 @@ void	*ft_get_elements(t_cub *cub)
 	if (!elements)
 		return (print_error_get_elem("Malloc failed"), NULL);
 	check_elements(cub, elements);
+	if (!valid_ids(elements))
+	{
+		free_elements(elements);
+		print_error("Duplicate or missing element", NULL);
+	}
 	free_elements(elements);
 	return (cub);
 }

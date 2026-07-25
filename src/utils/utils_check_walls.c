@@ -12,51 +12,33 @@
 
 #include "../../includes/cub3d.h"
 
-static void	*check_help(char *str, size_t pos)
+static int	count_id(char ***e, char *id)
 {
-	if (ft_strlen(str) <= pos || str[pos] == '1' || ft_isspace(str[pos]))
-		return (NULL);
-	return ((void *)1);
+	int	i;
+	int	c;
+
+	i = -1;
+	c = 0;
+	while (e[++i])
+		if (!ft_strcmp(e[i][0], id))
+			c++;
+	return (c);
 }
 
-int	check_down(char **map, int j, int i)
+int	valid_ids(char ***e)
 {
-	int	tmp;
-	int	len;
+	char	*ids[6];
+	int		i;
 
-	len = count_element(map);
-	tmp = 0;
-	while (j + tmp < len)
-	{
-		if (!map[j + tmp])
-			break ;
-		if (ft_strlen(map[j + tmp]) > (size_t)i && !ft_isspace(map[j + tmp][i]))
-			return (1);
-		tmp++;
-		if (j + tmp >= len)
-			break ;
-		if (check_help(map[j + tmp], i))
+	ids[0] = "NO";
+	ids[1] = "SO";
+	ids[2] = "WE";
+	ids[3] = "EA";
+	ids[4] = "F";
+	ids[5] = "C";
+	i = -1;
+	while (++i < 6)
+		if (count_id(e, ids[i]) != 1)
 			return (0);
-	}
-	return (0);
-}
-
-int	check_up(char **map, int j, int i)
-{
-	int	tmp;
-
-	tmp = 0;
-	while (j - tmp >= 0)
-	{
-		if (!map[j - tmp])
-			break ;
-		if (ft_strlen(map[j - tmp]) > (size_t)i && !ft_isspace(map[j - tmp][i]))
-			return (1);
-		tmp++;
-		if (j - tmp < 0)
-			return (0);
-		if (check_help(map[j - tmp], i))
-			return (0);
-	}
-	return (0);
+	return (1);
 }

@@ -1,6 +1,6 @@
 NAME    = cub3D
 CC      = cc
-CFLAGS  = -Wall -Wextra -Werror -g
+CFLAGS  = -Wall -Wextra -Werror
 
 MLX_DIR = minilibx
 MLX     = $(MLX_DIR)/libmlx.a
@@ -10,7 +10,6 @@ INCS    = -I ./includes -I ./libft -I $(MLX_DIR)
 
 SRC =	src/main.c \
 		src/parsing/ft_check.c \
-		src/parsing/check_args.c \
 		src/parsing/get_map.c \
 		src/parsing/elements.c \
 		src/parsing/map_elements.c \
@@ -56,19 +55,5 @@ fclean: clean
 	$(MAKE) -C libft fclean
 
 re: fclean all
-
-# check the norm on our own code only (skip libft / minilibx / gnl)
-norm:
-	norminette includes/ src/
-
-# run under a virtual display + valgrind, auto-close via ESC so it exits clean
-leak: all
-	xvfb-run -a --server-args="-screen 0 1280x720x24" bash -c '\
-		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \
-			--suppressions=mlx.supp ./cub3D maps/a3.cub & \
-		VP=$$!; sleep 5; \
-		WID=$$(xdotool search --name Mok3ab3D | head -1); \
-		xdotool key --window $$WID Escape; \
-		wait $$VP'
 
 .PHONY: all clean fclean re norm leak

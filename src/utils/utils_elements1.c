@@ -65,6 +65,7 @@ void	print_texture(const char *message, const char *id)
 	else
 		printf("%s", message);
 	printf("\n");
+	exit(1);
 }
 
 void	check_texture(char **element, char *id)

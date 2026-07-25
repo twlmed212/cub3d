@@ -29,21 +29,20 @@ void	check_ext(char *str, char *ext)
 	len = ft_strlen(str);
 	if (len <= 4 || *(str + len - 5) == '/')
 	{
-		printf("filename invalide\n");
+		printf("Error\nfilename invalide\n");
 		exit(1);
 	}
 	if (ft_strcmp(str + len - 4, ext))
 	{
-		printf("Wrong extantion name\n");
+		printf("Error\nWrong extantion name\n");
 		exit(1);
 	}
 }
 
-t_cub	*ft_check(char **av)
+static t_cub	*new_cub(char *path)
 {
 	t_cub	*cub;
 
-	check_ext(av[1], ".cub");
 	cub = malloc(sizeof(t_cub));
 	if (!cub)
 	{
@@ -51,18 +50,33 @@ t_cub	*ft_check(char **av)
 		exit(1);
 	}
 	ft_bzero(cub, sizeof(t_cub));
-	cub->fd = open_file(av[1]);
+	cub->fd = open_file(path);
 	if (cub->fd < 0)
 	{
 		free(cub);
 		exit(1);
 	}
+	return (cub);
+}
+
+t_cub	*ft_check(char **av)
+{
+	t_cub	*cub;
+
+	check_ext(av[1], ".cub");
+	cub = new_cub(av[1]);
 	if (!ft_get_elements(cub))
 	{
 		close(cub->fd);
 		free(cub);
 		exit(1);
 	}
-	get_map(cub);
+	if (!get_map(cub))
+	{
+		ft_free_tab(cub->elem);
+		free(cub);
+		printf("Error\nInvalid map\n");
+		exit(1);
+	}
 	return (cub);
 }
