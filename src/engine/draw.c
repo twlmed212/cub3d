@@ -63,8 +63,8 @@ static int	tex_color(t_tex *tex, int tex_x, int tex_y)
 
 void	calc_wall(t_ray *ray)
 {
-	if (ray->cam_distance <= 0)
-		ray->cam_distance = 1e-6;
+	if (ray->cam_distance < 1e-4)
+		ray->cam_distance = 1e-4;
 	ray->line_h = (int)(WIN_HEIGHT / ray->cam_distance);
 	if (ray->line_h == 0)
 		ray->line_h = 1;

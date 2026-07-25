@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-static int	touch_wall(t_cub *game, double x, double y)
+static int	is_wall_point(t_cub *game, double x, double y)
 {
 	int	mx;
 	int	my;
@@ -30,6 +30,16 @@ static int	touch_wall(t_cub *game, double x, double y)
 	if (mx >= (int)ft_strlen(game->map[my]))
 		return (1);
 	return (game->map[my][mx] != '0');
+}
+
+static int	touch_wall(t_cub *game, double x, double y)
+{
+	if (is_wall_point(game, x - 0.2, y - 0.2)
+		|| is_wall_point(game, x + 0.2, y - 0.2)
+		|| is_wall_point(game, x - 0.2, y + 0.2)
+		|| is_wall_point(game, x + 0.2, y + 0.2))
+		return (1);
+	return (0);
 }
 
 // check each axe alone so we slide on walls insted of stoping
