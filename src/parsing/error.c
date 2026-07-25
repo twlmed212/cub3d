@@ -14,36 +14,43 @@
 
 void	print_error(const char *message, const char *id)
 {
-	printf("Error\n");
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd((char *)message, 2);
 	if (id)
-		printf(message, id);
-	else
-		printf("%s", message);
-	printf("\n");
+		ft_putstr_fd((char *)id, 2);
+	ft_putstr_fd("\n", 2);
 	free_grabage();
 	exit(1);
 }
 
 void	print_error_get_elem(char *message)
 {
-	printf("Error\n%s\n", message);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("\n", 2);
 }
 
 void	print_error_rgb(const char *message)
 {
-	printf("Error\n%s\n", message);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd((char *)message, 2);
+	ft_putstr_fd("\n", 2);
 	free_grabage();
 	exit(1);
 }
 
 void	error_space(char *message)
 {
-	printf("Error : %s\n", message);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("\n", 2);
 }
 
 void	print_error_map(char *message)
 {
-	printf("Error\n%s\n", message);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("\n", 2);
 	free_grabage();
 	exit(1);
 }

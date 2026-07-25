@@ -59,7 +59,7 @@ void	*ft_walls(char **map, int row)
 			return (NULL);
 		if (map[row][i] != '1')
 		{
-			printf("Error : Invalid wall \n");
+			ft_putstr_fd("Error\nInvalid wall\n", 2);
 			return (NULL);
 		}
 		while (map[row][i] == '1')
@@ -99,7 +99,7 @@ void	*check_map_walls(char **map)
 {
 	if (con_table(map) <= 2)
 	{
-		printf("Error\nMap must have at least 3 rows\n");
+		ft_putstr_fd("Error\nMap must have at least 3 rows\n", 2);
 		return (NULL);
 	}
 	if (!ft_walls(map, 0))

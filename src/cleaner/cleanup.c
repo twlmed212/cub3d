@@ -60,7 +60,7 @@ void	*ft_malloc(size_t size)
 	ptr = malloc(size);
 	if (!ptr)
 	{
-		printf("Error\nMemory allocation failed\n");
+		ft_putstr_fd("Error\nMemory allocation failed\n", 2);
 		free_grabage();
 		exit(1);
 	}

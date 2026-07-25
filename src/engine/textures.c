@@ -37,14 +37,14 @@ static void	load_one(t_cub *game, t_tex *t, char *path)
 {
 	if (!path)
 	{
-		printf("Error\ntexture path missing\n");
+		ft_putstr_fd("Error\ntexture path missing\n", 2);
 		free_grabage();
 		exit(1);
 	}
 	t->ptr = mlx_xpm_file_to_image(game->mlx, path, &t->width, &t->height);
 	if (!t->ptr)
 	{
-		printf("Error\nfailed to load texture\n");
+		ft_putstr_fd("Error\nfailed to load texture\n", 2);
 		free_grabage();
 		exit(1);
 	}

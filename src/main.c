@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		printf("Usage: ./cub3D <map.cub>\n");
+		ft_putstr_fd("Usage: ./cub3D <map.cub>\n", 2);
 		free_grabage();
 		exit(1);
 	}

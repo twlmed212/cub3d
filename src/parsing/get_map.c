@@ -25,7 +25,7 @@ static void	*check_line(int fd)
 		if (!*line)
 			return ((void *)1);
 		if (*line != '\n' && !ft_check_content(line))
-			return (printf("The map is sperited\n"), NULL);
+			return (ft_putstr_fd("Error\nThe map is sperited\n", 2), NULL);
 		line = get_next_line(fd, &flag);
 	}
 	return ((void *)1);

@@ -48,7 +48,7 @@ char	***split_elements(char **cub_elem)
 		elements[i] = ft_split(cub_elem[i], ' ');
 		if (!elements[i])
 		{
-			printf("Error\nFailed to split element line\n");
+			ft_putstr_fd("Error\nFailed to split element line\n", 2);
 			free_grabage();
 			exit(1);
 		}
@@ -60,12 +60,11 @@ char	***split_elements(char **cub_elem)
 
 void	print_texture(const char *message, const char *id)
 {
-	printf("Error\n");
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd((char *)message, 2);
 	if (id)
-		printf(message, id);
-	else
-		printf("%s", message);
-	printf("\n");
+		ft_putstr_fd((char *)id, 2);
+	ft_putstr_fd("\n", 2);
 	free_grabage();
 	exit(1);
 }
@@ -82,10 +81,10 @@ void	check_texture(char **element, char *id)
 	if (element[2])
 		print_texture("Too many arguments for ", id);
 	if (!check_xpm(element[1]))
-		print_texture("Texture must be name + .xpm : %s", element[1]);
+		print_texture("Texture must be name + .xpm : ", element[1]);
 	fd = open(element[1], O_RDONLY);
 	if (fd < 0)
-		print_texture("Cannot open texture file: %s", element[1]);
+		print_texture("Cannot open texture file: ", element[1]);
 	close(fd);
 }
 

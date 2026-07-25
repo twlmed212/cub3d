@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_elements.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abmoudni <abmoudni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtawil <mtawil@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 06:29:41 by abmoudni          #+#    #+#             */
-/*   Updated: 2026/07/23 07:39:13 by abmoudni         ###   ########.fr       */
+/*   Updated: 2026/07/25 11:23:16 by mtawil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ static int	ft_set_player(t_cub *game, int y, int x)
 
 void	print_pars_elem(char *message)
 {
-	printf("Error\n%s\n", message);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("\n", 2);
 }
 
 static void	*ft_parse_elem(t_cub *game, char **map, int y, int *x)
@@ -84,7 +86,7 @@ void	*ft_map_elements(t_cub *game, char **map)
 	}
 	if (game->player.x == 0 && game->player.y == 0)
 	{
-		printf("No player found\n");
+		ft_putstr_fd("Error\nNo player found\n", 2);
 		return (NULL);
 	}
 	return ((void *)1);
