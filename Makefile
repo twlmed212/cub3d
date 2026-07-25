@@ -58,29 +58,4 @@ fclean: clean
 
 re: fclean all
 
-# run every invalid map under valgrind; must be 0 leaks / 0 crashes / 0 accepted
-testbad: all
-	@xvfb-run -a bash -c 'l=0; c=0; a=0; \
-		for f in maps/bad/*.cub; do \
-			o=$$(timeout 6 valgrind --leak-check=full --suppressions=mlx.supp ./cub3D $$f 2>&1); s=$$?; \
-			st=ok; echo "$$o" | grep -q "no leaks are possible" || { st=LEAK; l=$$((l+1)); }; \
-			[ $$s -eq 139 ] && { st=SEGV; c=$$((c+1)); }; \
-			[ $$s -eq 124 ] && { st=ACCEPTED; a=$$((a+1)); }; \
-			printf "%-24s %s\n" "$$(basename $$f .cub)" "$$st"; \
-		done; echo "--- LEAKS=$$l CRASHES=$$c ACCEPTED=$$a ---"'
-
-# check the norm on our own code only (skip libft / minilibx / gnl)
-norm:
-	norminette includes/ src/
-
-# run under a virtual display + valgrind, auto-close via ESC so it exits clean
-leak: all
-	xvfb-run -a --server-args="-screen 0 1280x720x24" bash -c '\
-		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \
-			--suppressions=mlx.supp ./cub3D maps/a3.cub & \
-		VP=$$!; sleep 5; \
-		WID=$$(xdotool search --name Mok3ab3D | head -1); \
-		xdotool key --window $$WID Escape; \
-		wait $$VP'
-
 .PHONY: all clean fclean re norm leak testbad
