@@ -59,3 +59,51 @@ int	valid_ids(char ***e)
 			return (0);
 	return (1);
 }
+
+static int	check_tile_closed(char **map, int y, int x)
+{
+	int	h;
+
+	h = 0;
+	while (map[h])
+		h++;
+	if (y <= 0 || y >= h - 1 || x <= 0)
+		return (0);
+	if (x >= (int)ft_strlen(map[y - 1]) || ft_isspace(map[y - 1][x]))
+		return (0);
+	if (x >= (int)ft_strlen(map[y + 1]) || ft_isspace(map[y + 1][x]))
+		return (0);
+	if (ft_isspace(map[y][x - 1]))
+		return (0);
+	if (!map[y][x + 1] || ft_isspace(map[y][x + 1]))
+		return (0);
+	return (1);
+}
+
+int	check_map_closed(char **map)
+{
+	int		y;
+	int		x;
+	char	c;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			c = map[y][x];
+			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+			{
+				if (!check_tile_closed(map, y, x))
+				{
+					ft_putstr_fd("Error\nMap is not enclosed by walls\n", 2);
+					return (0);
+				}
+			}
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}

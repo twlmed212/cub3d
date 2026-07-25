@@ -108,5 +108,7 @@ void	*check_map_walls(char **map)
 		return (NULL);
 	if (!ft_side_walls(map))
 		return (NULL);
+	if (!check_map_closed(map))
+		return (NULL);
 	return ((void *)1);
 }

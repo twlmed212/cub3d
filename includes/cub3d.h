@@ -127,6 +127,7 @@ void			error_space(char *message);
 void			print_error_map(char *message);
 int				valid_ids(char ***e);
 int				space_run_ok(char *row, int x);
+int				check_map_closed(char **map);
 void			check_elements(t_cub *cub, char ***elements);
 void			check_color(char **element, t_cub *cub, char *id);
 
